@@ -8,7 +8,8 @@ trait Sluggable
     {
         static::saving(function($model)
         {
-            !empty($model->slug)?: $model->slug = static::sluggify($model->name);
+            $slug = static::sluggify($model->{static::$sluggable ?: 'name'});
+            !empty($model->slug)?: $model->slug = $slug;
         });
     }
 
